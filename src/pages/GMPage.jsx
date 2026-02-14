@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StatusBar from '../components/StatusBar';
 import { useAccount } from 'wagmi';
-import { 
-  Transaction, 
-  TransactionButton, 
-  TransactionStatus,
-  TransactionStatusAction,
-  TransactionStatusLabel
+import {
+    Transaction,
+    TransactionButton,
+    TransactionStatus,
+    TransactionStatusAction,
+    TransactionStatusLabel
 } from '@coinbase/onchainkit/transaction';
 import { base } from 'viem/chains';
 import { encodeFunctionData, parseEther } from 'viem';
@@ -41,13 +41,13 @@ const GMPage = () => {
             const now = new Date();
             const tomorrow = new Date();
             tomorrow.setHours(24, 0, 0, 0);
-            
+
             const diff = tomorrow - now;
-            
+
             const hours = Math.floor(diff / (1000 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
+
             setTimeLeft(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
         }, 1000);
 
@@ -85,55 +85,55 @@ const GMPage = () => {
                 <h1 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest">New Transaction</h1>
                 <div className="w-12"></div>
             </header>
-            
-            <main className="flex-1 overflow-y-auto w-full px-8 pt-12 pb-32">
-                <div className="flex flex-col items-center mb-12">
-                    <span className="text-primary font-bold text-sm tracking-wide">RISE AND SHINE</span>
-                    <h2 className="text-4xl font-black mt-2 leading-tight text-slate-900 dark:text-slate-100 text-center">Good Morning,<br/>Alex.</h2>
+
+            <main className="flex-1 overflow-y-auto w-full px-4 pt-8 pb-24">
+                <div className="flex flex-col items-center mb-8">
+                    <span className="text-primary font-bold text-[10px] tracking-wide">RISE AND SHINE</span>
+                    <h2 className="text-3xl font-black mt-1 leading-tight text-slate-900 dark:text-slate-100 text-center">Good Morning,<br />Alex.</h2>
                 </div>
 
-                <div className="glass-effect dark:bg-slate-900/60 p-10 rounded-[3rem] relative overflow-hidden group border border-white dark:border-white/5 shadow-2xl shadow-black/10">
-                    <div className="absolute top-0 right-0 w-40 h-40 bg-primary/10 blur-3xl rounded-full -mr-20 -mt-20 group-hover:bg-primary/20 transition-all duration-700"></div>
-                    <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-blue-500/5 blur-3xl rounded-full"></div>
-                    
+                <div className="glass-effect dark:bg-slate-900/60 p-6 rounded-[2.5rem] relative overflow-hidden group border border-white dark:border-white/5 shadow-2xl shadow-black/10">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-primary/20 transition-all duration-700"></div>
+                    <div className="absolute -bottom-10 -left-10 w-24 h-24 bg-blue-500/5 blur-3xl rounded-full"></div>
+
                     <div className="relative z-10 flex flex-col items-center text-center">
-                        <div className="w-32 h-32 bg-slate-50 dark:bg-slate-800/50 rounded-full flex items-center justify-center mb-8 border border-slate-100 dark:border-white/5 shadow-inner relative">
-                            <span className="text-6xl animate-bounce-slow drop-shadow-lg">☀️</span>
+                        <div className="w-24 h-24 bg-slate-50 dark:bg-slate-800/50 rounded-full flex items-center justify-center mb-6 border border-slate-100 dark:border-white/5 shadow-inner relative">
+                            <span className="text-5xl animate-bounce-slow drop-shadow-lg">☀️</span>
                             <div className="absolute -inset-2 border-2 border-dashed border-primary/20 rounded-full animate-[spin_10s_linear_infinite]"></div>
                         </div>
-                        
-                        <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3 tracking-tight">
+
+                        <h3 className="text-xl font-black text-slate-900 dark:text-white mb-2 tracking-tight">
                             {isAlreadySent ? 'GM Sent for Today!' : 'Send a Daily GM'}
                         </h3>
-                        <p className="text-slate-500 dark:text-slate-400 text-sm mb-10 leading-relaxed px-4">
-                            {isAlreadySent 
+                        <p className="text-slate-500 dark:text-slate-400 text-xs mb-8 leading-relaxed px-2">
+                            {isAlreadySent
                                 ? `You've already sent your GM today. Next GM available in ${timeLeft}`
                                 : 'Start your day on Base by sending a message to the blockchain.'}
                         </p>
-                        
+
                         {!isAlreadySent ? (
                             <Transaction
                                 chainId={base.id}
                                 calls={calls}
                                 onSuccess={handleSuccess}
                             >
-                                <TransactionButton className="w-full h-16 rounded-2xl glossy-button font-bold text-lg flex items-center justify-center gap-3 shadow-xl shadow-primary/30" />
-                                <div className="mt-4">
+                                <TransactionButton className="w-full h-12 rounded-xl glossy-button font-bold text-base flex items-center justify-center gap-2 shadow-xl shadow-primary/30" />
+                                <div className="mt-3">
                                     <TransactionStatus>
-                                        <TransactionStatusLabel className="dark:text-white font-medium" />
-                                        <TransactionStatusAction className="text-primary font-bold hover:underline" />
+                                        <TransactionStatusLabel className="dark:text-white font-medium text-xs" />
+                                        <TransactionStatusAction className="text-primary font-bold hover:underline text-xs" />
                                     </TransactionStatus>
                                 </div>
                             </Transaction>
                         ) : (
                             <div className="w-full">
-                                <button disabled className="w-full h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 font-bold text-lg flex flex-col items-center justify-center border border-dashed border-slate-200 dark:border-white/5">
+                                <button disabled className="w-full h-12 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 font-bold text-sm flex flex-col items-center justify-center border border-dashed border-slate-200 dark:border-white/5">
                                     <div className="flex items-center gap-2">
-                                        <span className="material-icons text-xl">schedule</span>
+                                        <span className="material-icons text-lg">schedule</span>
                                         <span>Next GM in {timeLeft}</span>
                                     </div>
                                 </button>
-                                <p className="mt-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Come back at 00:00</p>
+                                <p className="mt-3 text-[9px] font-black uppercase tracking-widest text-slate-400">Come back at 00:00</p>
                             </div>
                         )}
                     </div>
