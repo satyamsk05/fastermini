@@ -265,31 +265,31 @@ const HomePage = () => {
             <div className="bg-orb bg-primary/30 -top-20 -right-20"></div>
             <div className="bg-orb bg-primary/20 top-1/2 -left-20"></div>
 
-            <main className="flex-1 overflow-y-auto p-6 pb-32 w-full">
-                <header className="flex justify-between items-center mb-8 pt-4">
+            <main className="flex-1 overflow-y-auto px-4 pb-24 w-full">
+                <header className="flex justify-between items-center mb-6 pt-4">
                     <div className="flex flex-col">
-                        <p className="text-[10px] font-black text-primary/80 dark:text-primary/70 uppercase tracking-[0.2em] mb-1">
+                        <p className="text-[9px] font-black text-primary/80 dark:text-primary/70 uppercase tracking-[0.2em] mb-0.5">
                             {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
                         </p>
-                        <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                        <h1 className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
                             {context?.user?.displayName ? `Hello, ${context.user.displayName}` : (isConnected ? `Hello, ${userName}` : 'Good morning')}
                         </h1>
 
                     </div>
                     <div className="flex items-center gap-2">
-                        <button className="w-12 h-12 rounded-2xl glass-effect dark:bg-slate-900/80 flex items-center justify-center text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/5 active:scale-90 transition-all">
-                            <span className="material-icons text-xl">notifications_none</span>
+                        <button className="w-10 h-10 rounded-xl glass-effect dark:bg-slate-900/80 flex items-center justify-center text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/5 active:scale-90 transition-all">
+                            <span className="material-icons text-lg">notifications_none</span>
                         </button>
                         <button
                             onClick={() => navigate('/settings')}
-                            className="flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full bg-blue-500 text-white shadow-md active:scale-95 transition-all"
+                            className="flex items-center gap-2 pl-1.5 pr-3 py-1 rounded-full bg-blue-500 text-white shadow-md active:scale-95 transition-all"
                         >
                             <img
                                 src={avatarUrl}
                                 alt="DP"
-                                className="w-8 h-8 rounded-full ring-2 ring-white/50"
+                                className="w-7 h-7 rounded-full ring-2 ring-white/50"
                             />
-                            <span className="text-[11px] font-black">
+                            <span className="text-[10px] font-black">
                                 {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Profile'}
                             </span>
                         </button>
@@ -297,19 +297,19 @@ const HomePage = () => {
                     </div>
                 </header>
 
-                <section className="glass-effect dark:bg-slate-900/60 rounded-[2.5rem] p-8 mb-10 border border-white dark:border-white/5 relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-primary/20 transition-colors"></div>
+                <section className="glass-effect dark:bg-slate-900/60 rounded-3xl p-5 mb-6 border border-white dark:border-white/5 relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 blur-2xl rounded-full -mr-10 -mt-10 group-hover:bg-primary/20 transition-colors"></div>
 
                     <div className="relative z-10">
-                        <div className="flex justify-between items-start mb-6">
+                        <div className="flex justify-between items-start mb-4">
                             <div>
-                                <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-[0.2em] mb-2">Total Balance</p>
+                                <p className="text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Total Balance</p>
                                 <div className="flex items-baseline gap-1">
-                                    <h3 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">{balance ? parseFloat(balance.formatted).toFixed(4) : '0.0000'}</h3>
-                                    <span className="text-sm font-bold text-primary">ETH</span>
+                                    <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{balance ? parseFloat(balance.formatted).toFixed(4) : '0.0000'}</h3>
+                                    <span className="text-xs font-bold text-primary">ETH</span>
                                 </div>
                             </div>
-                            <div className="bg-green-500/10 text-green-600 dark:text-green-400 px-3 py-1 rounded-full text-xs font-bold border border-green-500/20">
+                            <div className="bg-green-500/10 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full text-[10px] font-bold border border-green-500/20">
                                 +2.5%
                             </div>
                         </div>
@@ -317,14 +317,14 @@ const HomePage = () => {
                         <div className="flex gap-3">
                             <button
                                 onClick={() => setShowReceiveModal(true)}
-                                className="flex-1 glossy-button h-14 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/25"
+                                className="flex-1 glossy-button h-12 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-primary/25 text-sm"
                             >
                                 <span className="material-icons text-lg">qr_code_2</span>
                                 Receive
                             </button>
                             <button
                                 onClick={() => setShowSendModal(true)}
-                                className="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 h-14 rounded-2xl font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-lg dark:shadow-white/5"
+                                className="flex-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 h-12 rounded-xl font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-lg dark:shadow-white/5 text-sm"
                             >
                                 <span className="material-icons text-lg">north_east</span>
                                 Send
@@ -333,90 +333,90 @@ const HomePage = () => {
                     </div>
                 </section>
 
-                <div className="mb-10">
+                <div className="mb-8">
                     <button
                         onClick={() => navigate('/mint')}
-                        className="glossy-button w-full py-5 rounded-full text-white font-extrabold text-lg flex items-center justify-center gap-3 transition-transform active:scale-95 shadow-lg shadow-primary/20"
+                        className="glossy-button w-full py-3.5 rounded-2xl text-white font-extrabold text-base flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-lg shadow-primary/20"
                     >
-                        <span className="material-icons">bolt</span>
+                        <span className="material-icons text-lg">bolt</span>
                         Mint OG NFT
                     </button>
                 </div>
 
-                <section className="mb-24">
-                    <div className="flex items-center justify-between mb-6">
-                        <h3 className="font-black text-xl text-slate-900 dark:text-white">Recent Activity</h3>
-                        {activities.length > 0 && <button className="text-primary text-xs font-bold uppercase tracking-widest">View All</button>}
+                <section className="mb-16">
+                    <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-black text-lg text-slate-900 dark:text-white">Recent Activity</h3>
+                        {activities.length > 0 && <button className="text-primary text-[10px] font-bold uppercase tracking-widest">View All</button>}
                     </div>
                     {activities.length > 0 && (
-                        <div className="flex gap-2 mb-4">
+                        <div className="flex gap-2 mb-3">
                             {['All', 'Transaction', 'GM', 'Check-in'].map((tab) => (
                                 <button
                                     key={tab}
                                     onClick={() => setActivityFilter(tab)}
-                                    className={`px-3 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest border transition-all ${activityFilter === tab
+                                    className={`px-2.5 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest border transition-all ${activityFilter === tab
                                         ? 'bg-primary/10 border-primary text-primary'
                                         : 'bg-slate-100 dark:bg-white/5 border-transparent text-slate-500 dark:text-slate-400'
                                         }`}
                                 >
-                                    {tab} <span className="ml-1 text-[9px] font-bold">({counts[tab] ?? 0})</span>
+                                    {tab} <span className="ml-1 text-[8px] font-bold">({counts[tab] ?? 0})</span>
                                 </button>
                             ))}
                         </div>
                     )}
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                         {!isConnected ? (
-                            <div className="text-center py-12 glass-effect dark:bg-slate-900/40 rounded-[2.5rem] border-dashed border-2 border-slate-200 dark:border-white/5">
-                                <div className="w-20 h-20 bg-slate-50 dark:bg-slate-800/50 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-100 dark:border-white/5">
-                                    <span className="material-icons text-3xl text-slate-300 dark:text-slate-600">history</span>
+                            <div className="text-center py-8 glass-effect dark:bg-slate-900/40 rounded-3xl border-dashed border-2 border-slate-200 dark:border-white/5">
+                                <div className="w-16 h-16 bg-slate-50 dark:bg-slate-800/50 rounded-full flex items-center justify-center mx-auto mb-3 border border-slate-100 dark:border-white/5">
+                                    <span className="material-icons text-2xl text-slate-300 dark:text-slate-600">history</span>
                                 </div>
-                                <p className="text-slate-500 dark:text-slate-400 font-bold">Connect wallet to see activity</p>
+                                <p className="text-slate-500 dark:text-slate-400 font-bold text-sm">Connect wallet to see activity</p>
                             </div>
                         ) : activities.length === 0 ? (
-                            <div className="text-center py-12 glass-effect dark:bg-slate-900/40 rounded-[2.5rem] border-dashed border-2 border-slate-200 dark:border-white/5 shadow-sm">
-                                <div className="w-20 h-20 bg-slate-50 dark:bg-slate-800/50 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-100 dark:border-white/5">
-                                    <span className="material-icons text-3xl text-slate-300 dark:text-slate-600">auto_awesome</span>
+                            <div className="text-center py-8 glass-effect dark:bg-slate-900/40 rounded-3xl border-dashed border-2 border-slate-200 dark:border-white/5 shadow-sm">
+                                <div className="w-16 h-16 bg-slate-50 dark:bg-slate-800/50 rounded-full flex items-center justify-center mx-auto mb-3 border border-slate-100 dark:border-white/5">
+                                    <span className="material-icons text-2xl text-slate-300 dark:text-slate-600">auto_awesome</span>
                                 </div>
-                                <p className="text-slate-500 dark:text-slate-400 font-bold">No activity yet. Start by sending a GM!</p>
+                                <p className="text-slate-500 dark:text-slate-400 font-bold text-sm">No activity yet. Start by sending a GM!</p>
                             </div>
                         ) : (
                             visibleActivities.map((activity) => (
                                 <div
                                     key={activity.id}
                                     onClick={() => handleTxClick(activity)}
-                                    className="flex items-center justify-between p-5 rounded-3xl glass-effect dark:bg-slate-900/50 border border-slate-100 dark:border-white/5 hover:scale-[1.02] transition-all cursor-pointer group active:scale-95 relative overflow-hidden"
+                                    className="flex items-center justify-between p-4 rounded-2xl glass-effect dark:bg-slate-900/50 border border-slate-100 dark:border-white/5 hover:scale-[1.02] transition-all cursor-pointer group active:scale-95 relative overflow-hidden"
                                 >
                                     {activity.type === 'Check-in' && activity.points > 0 && (
-                                        <div className="absolute top-0 right-0 bg-primary/10 dark:bg-primary/20 text-primary text-[10px] font-black px-3 py-1 rounded-bl-2xl flex items-center gap-1 border-l border-b border-primary/10">
-                                            <span className="material-icons text-[10px]">add</span>
+                                        <div className="absolute top-0 right-0 bg-primary/10 dark:bg-primary/20 text-primary text-[8px] font-black px-2 py-0.5 rounded-bl-xl flex items-center gap-1 border-l border-b border-primary/10">
+                                            <span className="material-icons text-[8px]">add</span>
                                             {activity.points} PTS
                                         </div>
                                     )}
-                                    <div className="flex items-center gap-4">
-                                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-inner ${activity.type === 'GM'
+                                    <div className="flex items-center gap-3">
+                                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-inner ${activity.type === 'GM'
                                             ? 'bg-blue-50 dark:bg-blue-500/10 text-blue-500'
                                             : 'bg-orange-50 dark:bg-orange-500/10 text-orange-500'
                                             }`}>
-                                            <span className="material-icons text-2xl">{activity.type === 'GM' ? 'send' : 'local_fire_department'}</span>
+                                            <span className="material-icons text-lg">{activity.type === 'GM' ? 'send' : 'local_fire_department'}</span>
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">{activity.type === 'GM' ? `Sent GM: ${activity.text}` : 'Check-in'}</h4>
-                                            <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">{activity.timestamp}</p>
+                                            <h4 className="font-bold text-sm text-slate-900 dark:text-white group-hover:text-primary transition-colors">{activity.type === 'GM' ? `Sent GM: ${activity.text}` : 'Check-in'}</h4>
+                                            <p className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 mt-0.5">{activity.timestamp}</p>
                                         </div>
                                     </div>
                                     <div className="text-right">
-                                        <p className="font-black text-slate-900 dark:text-white">{activity.amount}</p>
+                                        <p className="font-black text-sm text-slate-900 dark:text-white">{activity.amount}</p>
                                         {activity.transactionHash && (
                                             <a
                                                 href={`https://basescan.org/tx/${activity.transactionHash}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="block text-[10px] font-bold text-primary uppercase tracking-tighter underline decoration-primary/30"
+                                                className="block text-[8px] font-bold text-primary uppercase tracking-tighter underline decoration-primary/30"
                                             >
                                                 ...{activity.transactionHash.slice(-5)}
                                             </a>
                                         )}
-                                        <p className="text-[10px] font-bold text-green-500 uppercase tracking-tighter">Success</p>
+                                        <p className="text-[8px] font-bold text-green-500 uppercase tracking-tighter">Success</p>
                                     </div>
                                 </div>
                             ))
@@ -424,38 +424,38 @@ const HomePage = () => {
                     </div>
                 </section>
 
-                <section className="mb-8">
-                    <div className="flex items-center justify-between mb-4">
-                        <h3 className="font-black text-xl text-slate-900 dark:text-white">Routines</h3>
-                        <button className="text-primary text-xs font-bold uppercase tracking-widest">Manage</button>
+                <section className="mb-6">
+                    <div className="flex items-center justify-between mb-3">
+                        <h3 className="font-black text-lg text-slate-900 dark:text-white">Routines</h3>
+                        <button className="text-primary text-[10px] font-bold uppercase tracking-widest">Manage</button>
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-3">
                         <button
                             onClick={() => navigate('/checkin')}
-                            className="glass-effect dark:bg-slate-900/40 p-5 rounded-[2rem] border border-white/20 dark:border-white/5 flex flex-col items-start gap-3 hover:scale-[1.02] transition-all group relative overflow-hidden"
+                            className="glass-effect dark:bg-slate-900/40 p-4 rounded-3xl border border-white/20 dark:border-white/5 flex flex-col items-start gap-2 hover:scale-[1.02] transition-all group relative overflow-hidden"
                         >
-                            <div className="absolute top-0 right-0 bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[10px] font-black px-3 py-1 rounded-bl-2xl border-l border-b border-orange-200 dark:border-orange-500/20">
+                            <div className="absolute top-0 right-0 bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[9px] font-black px-2 py-0.5 rounded-bl-xl border-l border-b border-orange-200 dark:border-orange-500/20">
                                 {checkInData?.streak ?? 0} Day
                             </div>
-                            <div className="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-500/10 flex items-center justify-center border border-orange-100 dark:border-orange-500/20 group-hover:bg-orange-100 dark:group-hover:bg-orange-500/20 transition-colors">
-                                <span className="material-icons text-orange-500">local_fire_department</span>
+                            <div className="w-9 h-9 rounded-xl bg-orange-50 dark:bg-orange-500/10 flex items-center justify-center border border-orange-100 dark:border-orange-500/20 group-hover:bg-orange-100 dark:group-hover:bg-orange-500/20 transition-colors">
+                                <span className="material-icons text-lg text-orange-500">local_fire_department</span>
                             </div>
                             <div className="text-left">
-                                <p className="text-sm font-black text-slate-900 dark:text-white">Daily Check-in</p>
-                                <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tight">Earn Points</p>
+                                <p className="text-xs font-black text-slate-900 dark:text-white">Daily Check-in</p>
+                                <p className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tight">Earn Points</p>
                             </div>
                         </button>
 
                         <button
                             onClick={() => navigate('/deploy')}
-                            className="glass-effect dark:bg-slate-900/40 p-5 rounded-[2rem] border border-white/20 dark:border-white/5 flex flex-col items-start gap-3 hover:scale-[1.02] transition-all group"
+                            className="glass-effect dark:bg-slate-900/40 p-4 rounded-3xl border border-white/20 dark:border-white/5 flex flex-col items-start gap-2 hover:scale-[1.02] transition-all group"
                         >
-                            <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-500/10 flex items-center justify-center border border-purple-100 dark:border-purple-500/20 group-hover:bg-purple-100 dark:group-hover:bg-purple-500/20 transition-colors">
-                                <span className="material-icons text-purple-500">rocket_launch</span>
+                            <div className="w-9 h-9 rounded-xl bg-purple-50 dark:bg-purple-500/10 flex items-center justify-center border border-purple-100 dark:border-purple-500/20 group-hover:bg-purple-100 dark:group-hover:bg-purple-500/20 transition-colors">
+                                <span className="material-icons text-lg text-purple-500">rocket_launch</span>
                             </div>
                             <div className="text-left">
-                                <p className="text-sm font-black text-slate-900 dark:text-white">Smart Deploy</p>
-                                <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tight">Base Mainnet</p>
+                                <p className="text-xs font-black text-slate-900 dark:text-white">Smart Deploy</p>
+                                <p className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tight">Base Mainnet</p>
                             </div>
                         </button>
                     </div>
