@@ -4,7 +4,7 @@
   --color-primary: #3b82f6;
   --color-primary-glow: rgba(59, 130, 246, 0.5);
   --color-background-light: #f8fafc;
-  --color-background-dark: #020617;
+  --color-background-dark: #0B1121;
   --color-card-dark: rgba(30, 41, 59, 0.4);
   --color-border-dark: rgba(255, 255, 255, 0.08);
   
@@ -43,7 +43,7 @@
   }
 
   .dark p, .dark span, .dark label {
-    @apply text-slate-400;
+    @apply text-slate-300;
   }
   
   /* Global Icon Styles */
@@ -73,7 +73,7 @@
   }
   
   .dark .glass-effect {
-    @apply bg-slate-900/60 backdrop-blur-xl border-white/5 shadow-2xl shadow-black/20;
+    @apply bg-[#1e293b]/30 backdrop-blur-2xl border border-white/10 shadow-2xl shadow-sky-900/10;
   }
 }
 
@@ -119,6 +119,11 @@
     border-radius: 9999px;
     opacity: 0.5;
     @apply pointer-events-none;
+  }
+
+  .dark .bg-orb {
+    opacity: 0.6;
+    filter: blur(120px) saturate(150%);
   }
 
   @keyframes bounce-slow {
