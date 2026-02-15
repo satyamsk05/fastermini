@@ -155,16 +155,26 @@ const MintPage = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 px-4">
+                <div className="flex items-center gap-3 px-4 py-2 bg-slate-50/50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/5 shadow-inner">
                   <div className="w-12 h-12 rounded-[1.25rem] overflow-hidden shadow-lg border-2 border-primary/20 bg-slate-100 dark:bg-background-dark">
                     <Avatar className="w-full h-full" address={address} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest leading-tight">Miner Identity</p>
-                    <p className="text-xs font-black text-slate-900 dark:text-white truncate">
-                      {address ? `${address.slice(0, 10)}...${address.slice(-8)}` : 'Connect wallet'}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-xs font-black text-slate-900 dark:text-white truncate">
+                        {address ? `${address.slice(0, 10)}...${address.slice(-8)}` : 'Safe Not Found'}
+                      </p>
+                    </div>
                   </div>
+                  {!isConnected && (
+                    <div className="relative group/connect">
+                      <div className="absolute -inset-1 bg-primary/20 rounded-full blur opacity-0 group-hover/connect:opacity-100 transition-opacity"></div>
+                      <Wallet>
+                        <ConnectWallet className="!h-10 !px-4 !text-[10px]" />
+                      </Wallet>
+                    </div>
+                  )}
                 </div>
               </div>
 

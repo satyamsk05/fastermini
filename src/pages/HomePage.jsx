@@ -183,7 +183,8 @@ const HomePage = () => {
                             {context?.user?.displayName ? `Hi, ${context.user.displayName}` : (isConnected ? `Hi, ${userName}` : 'GM, Friend')}
                         </h1>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center relative group/wallet">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-indigo-500/20 rounded-full blur opacity-0 group-hover/wallet:opacity-100 transition-opacity duration-500"></div>
                         <Wallet>
                             <ConnectWallet />
                             <WalletDropdown className="z-[100]">

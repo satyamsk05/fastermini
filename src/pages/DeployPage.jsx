@@ -22,7 +22,8 @@ const DeployPage = () => {
                     <span className="material-icons text-xl">chevron_left</span>
                 </button>
                 <h1 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Deployer</h1>
-                <div className="flex items-center">
+                <div className="flex items-center relative group/wallet">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-indigo-500/20 rounded-full blur opacity-0 group-hover/wallet:opacity-100 transition-opacity duration-500"></div>
                     <Wallet>
                         <ConnectWallet className="bg-transparent text-slate-900 dark:text-white p-0 h-auto min-w-0 border-none">
                             <Avatar className="h-9 w-9" />
