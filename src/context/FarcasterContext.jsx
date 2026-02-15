@@ -42,10 +42,12 @@ export const FarcasterProvider = ({ children }) => {
                 console.error('Error loading Farcaster context:', error);
             } finally {
                 setIsLoaded(true);
-                // Signal to Farcaster that the frame is ready
-                sdk.actions.ready();
             }
         };
+
+        if (sdk && sdk.actions) {
+            sdk.actions.ready();
+        }
 
         if (!isLoaded) {
             load();
