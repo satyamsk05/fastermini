@@ -5,6 +5,10 @@ import { useAccount, usePublicClient } from 'wagmi';
 import { base } from 'viem/chains';
 import { encodeFunctionData, parseEther, formatEther } from 'viem';
 import {
+  ConnectWallet,
+  Wallet
+} from '@coinbase/onchainkit/wallet';
+import {
   Transaction,
   TransactionButton,
   TransactionStatus,
@@ -12,7 +16,7 @@ import {
   TransactionStatusLabel
 } from '@coinbase/onchainkit/transaction';
 import { useActivity } from '../context/ActivityContext';
-import { Avatar } from '@coinbase/onchainkit/identity';
+import { Avatar, Name, Address, Identity, EthBalance } from '@coinbase/onchainkit/identity';
 
 const MintPage = () => {
   const navigate = useNavigate();

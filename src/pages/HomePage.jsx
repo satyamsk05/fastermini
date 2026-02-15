@@ -247,12 +247,14 @@ const HomePage = () => {
                 <div className="mb-10 animate-fade-in-up delay-200">
                     <button
                         onClick={() => navigate('/mint')}
-                        className="w-full h-16 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-black text-xs uppercase tracking-[0.3em] flex items-center justify-center gap-3 transition-all active:scale-[0.97] shadow-2xl shadow-purple-500/20 border border-white/20 relative overflow-hidden group hover:shadow-purple-500/40"
+                        className="glossy-button w-full h-18 rounded-3xl text-white font-black text-xs uppercase tracking-[0.3em] flex items-center justify-center gap-3 active:scale-[0.97] border border-white/20 relative overflow-hidden group"
                     >
                         <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-                        <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 blur-xl opacity-20 group-hover:opacity-40 transition-opacity animate-pulse"></div>
+                        <div className="absolute -inset-1 bg-gradient-to-r from-primary via-indigo-500 to-indigo-600 blur-xl opacity-20 group-hover:opacity-60 transition-all duration-700 animate-pulse"></div>
                         <span className="material-icons text-xl group-hover:rotate-12 transition-transform relative z-10">auto_awesome</span>
                         <span className="relative z-10">Mint Legend NFT</span>
+                        {/* Shimmer Effect */}
+                        <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-15deg] pointer-events-none animate-shimmer scale-150"></div>
                     </button>
                 </div>
 
