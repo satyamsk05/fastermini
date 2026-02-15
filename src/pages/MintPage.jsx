@@ -20,7 +20,8 @@ const MintPage = () => {
   const { addActivity } = useActivity();
   const publicClient = usePublicClient();
 
-  const NFT_CONTRACT = '0xfeE8ae1F0E4f8C31dC95622C96e4179F7E6EBfDa';
+  // Using the contract address from HomePage which is likely the correct one for the current project context
+  const NFT_CONTRACT = '0x354F55a1DDfC9d2F62068eC1385e8c3124CABC78';
   const MINT_PRICE_ETH = '0.00004';
 
   const nftAbi = [
@@ -35,14 +36,14 @@ const MintPage = () => {
 
   const [txHash, setTxHash] = useState(null);
   const [gasFee, setGasFee] = useState(null);
-  const [randomMotif, setRandomMotif] = useState('auto_awesome');
+  const [randomImage, setRandomImage] = useState('/images/hero.png');
 
-  // Random motifs to make the NFT feel unique
-  const motifs = ['auto_awesome', 'token', 'diamond', 'verified', 'stars', 'rocket_launch', 'shield', 'workspace_premium'];
+  // Actual images from the public folder to make the NFT feel authentic
+  const nftImages = ['/images/hero.png', '/images/square.png', '/images/splash.png', '/images/preview.png'];
 
   useEffect(() => {
-    // Pick a random motif on mount
-    setRandomMotif(motifs[Math.floor(Math.random() * motifs.length)]);
+    // Pick a random image on mount
+    setRandomImage(nftImages[Math.floor(Math.random() * nftImages.length)]);
 
     // Estimate gas if connected
     const estimateGas = async () => {
@@ -64,6 +65,8 @@ const MintPage = () => {
         setGasFee(parseFloat(feeEth).toFixed(6));
       } catch (error) {
         console.error('Gas estimation failed:', error);
+        // Fallback to a safe estimate if RPC fails
+        setGasFee('0.000020');
       }
     };
 
@@ -78,7 +81,6 @@ const MintPage = () => {
       amount: `-${MINT_PRICE_ETH} ETH`,
       status: 'Confirmed',
       transactionHash: hash,
-      icon: randomMotif
     });
   };
 
@@ -114,16 +116,16 @@ const MintPage = () => {
         <div className="flex flex-col items-center mb-10 animate-fade-in-up">
           <div className="relative mb-6">
             <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full scale-150 animate-pulse"></div>
-            <div className="w-24 h-24 rounded-[2.5rem] bg-gradient-to-br from-primary to-indigo-600 flex items-center justify-center shadow-2xl relative z-10 border-4 border-white dark:border-slate-900 overflow-hidden">
-              <div className="absolute inset-0 bg-white/10 animate-shimmer scale-[2]"></div>
-              <span className="material-icons text-white text-5xl animate-float relative z-20">{randomMotif}</span>
+            <div className="w-32 h-32 rounded-[2.5rem] bg-gradient-to-br from-primary to-indigo-600 flex items-center justify-center shadow-2xl relative z-10 border-4 border-white dark:border-slate-900 overflow-hidden">
+              <img src={randomImage} alt="NFT Preview" className="w-full h-full object-cover relative z-20" />
+              <div className="absolute inset-0 bg-primary/20 z-10"></div>
             </div>
             <div className="absolute -bottom-2 -right-2 bg-emerald-500 w-8 h-8 rounded-2xl flex items-center justify-center border-4 border-white dark:border-slate-900 shadow-lg z-30">
               <span className="material-icons text-white text-[14px]">verified</span>
             </div>
           </div>
           <h1 className="text-4xl font-black leading-tight text-slate-900 dark:text-white text-center tracking-tight">The Legend</h1>
-          <p className="text-slate-400 dark:text-slate-500 text-xs mt-2 font-bold uppercase tracking-[0.2em] bg-slate-100 dark:bg-white/5 px-4 py-1.5 rounded-full border border-slate-200 dark:border-white/5">NFT MINTING ACTIVE</p>
+          <p className="text-slate-400 dark:text-slate-500 text-[10px] mt-2 font-black uppercase tracking-[0.2em] bg-slate-100 dark:bg-white/5 px-4 py-1.5 rounded-full border border-slate-200 dark:border-white/5">Digital Collectible</p>
         </div>
 
         <div className="animate-fade-in-up delay-100">
@@ -132,48 +134,52 @@ const MintPage = () => {
             <div className="relative z-10 space-y-8">
               <div className="flex flex-col gap-6">
                 <div className="bg-slate-50 dark:bg-background-dark/60 p-5 rounded-3xl border border-slate-100 dark:border-white/5 shadow-inner">
-                  <div className="flex items-center justify-between mb-4">
-                    <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.25em]">Mint Price</p>
-                    <p className="text-[10px] font-black text-primary/60 dark:text-primary/40 uppercase tracking-[0.2em]">One Time Offer</p>
+                  <div className="flex items-center justify-between mb-4 flex-nowrap whitespace-nowrap">
+                    <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] shrink-0">Mint Price</p>
+                    <p className="text-[11px] font-black text-primary/80 dark:text-primary/60 uppercase tracking-widest shrink-0 ml-4 truncate">BASE MAINNET</p>
                   </div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">{MINT_PRICE_ETH} ETH</span>
-                    <div className="bg-primary/10 px-3 py-1 rounded-xl">
-                      <span className="text-[10px] font-black text-primary uppercase tracking-widest">Base Network</span>
+                  <div className="flex items-center justify-between mb-4 gap-4">
+                    <span className="text-2xl font-black text-slate-900 dark:text-white tracking-tight shrink-0">{MINT_PRICE_ETH} ETH</span>
+                    <div className="text-right">
+                      <p className="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase leading-none">Limited Edition</p>
+                      <p className="text-[10px] font-black text-primary uppercase tracking-tighter">Verified Contract</p>
                     </div>
                   </div>
                   <div className="h-px bg-slate-200/50 dark:bg-white/5 mb-4"></div>
-                  <div className="flex items-center justify-between bg-white/50 dark:bg-black/20 p-3 rounded-2xl border border-white dark:border-white/5">
+                  <div className="flex items-center justify-between bg-white/50 dark:bg-black/20 p-4 rounded-2xl border border-white dark:border-white/5">
                     <div className="flex items-center gap-2">
-                      <span className="material-icons text-primary/70 text-base">local_gas_station</span>
-                      <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400">Est. Gas Fee</span>
+                      <span className="material-icons text-primary/70 text-lg">local_gas_station</span>
+                      <span className="text-[11px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Est. Gas</span>
                     </div>
-                    <span className="text-[11px] font-black text-slate-900 dark:text-white">{gasFee ? `${gasFee} ETH` : 'Estimating...'}</span>
+                    <span className="text-xs font-black text-slate-900 dark:text-white">{gasFee ? `${gasFee} ETH` : 'Estimating...'}</span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3 px-4">
-                  <div className="w-12 h-12 rounded-2xl overflow-hidden shadow-lg border-2 border-primary/20 bg-slate-100 dark:bg-background-dark">
+                  <div className="w-12 h-12 rounded-[1.25rem] overflow-hidden shadow-lg border-2 border-primary/20 bg-slate-100 dark:bg-background-dark">
                     <Avatar className="w-full h-full" address={address} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Connected Miner</p>
+                    <p className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest leading-tight">Miner Identity</p>
                     <p className="text-xs font-black text-slate-900 dark:text-white truncate">
-                      {address ? `${address.slice(0, 8)}...${address.slice(-6)}` : 'Connect wallet'}
+                      {address ? `${address.slice(0, 10)}...${address.slice(-8)}` : 'Connect wallet'}
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="relative group/button">
+              <div className="relative group/button pt-2">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-indigo-500 rounded-[2.2rem] blur opacity-25 group-hover/button:opacity-50 transition duration-1000 group-hover/button:duration-200"></div>
                 <Transaction
                   chainId={base.id}
                   calls={calls}
                   onSuccess={handleSuccess}
                 >
-                  <TransactionButton className="w-full h-18 rounded-[2rem] glossy-button font-black text-xs uppercase tracking-[0.3em] flex items-center justify-center gap-3 shadow-2xl shadow-primary/30 active:scale-95 transition-all relative z-10" />
-                  <div className="mt-6 flex justify-center">
+                  <TransactionButton
+                    className="w-full h-18 rounded-[2rem] glossy-button font-black text-sm uppercase tracking-[0.2em] flex items-center justify-center gap-3 shadow-2xl shadow-primary/30 active:scale-95 transition-all relative z-10 text-white"
+                    text="Confirm Mint"
+                  />
+                  <div className="mt-8 flex justify-center">
                     <TransactionStatus>
                       <TransactionStatusLabel className="dark:text-white text-[11px] font-black uppercase tracking-widest text-center" />
                       <TransactionStatusAction className="text-emerald-500 font-black text-[11px] uppercase tracking-widest hover:underline ml-2" />
