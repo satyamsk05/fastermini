@@ -43,9 +43,15 @@ const HomePage = () => {
     const [selectedTx, setSelectedTx] = useState(null);
     const [showTxModal, setShowTxModal] = useState(false);
     const [activityFilter, setActivityFilter] = useState('All');
+    const [legends, setLegends] = useState([]);
     const [txFee, setTxFee] = useState(null);
     const publicClient = usePublicClient();
     const [txReceipt, setTxReceipt] = useState(null);
+
+    useEffect(() => {
+        const storedLegends = JSON.parse(localStorage.getItem('my_legends') || '[]');
+        setLegends(storedLegends);
+    }, []);
     const [txExplorerUrl, setTxExplorerUrl] = useState(null);
     const [copied, setCopied] = useState(false);
 
@@ -157,6 +163,7 @@ const HomePage = () => {
         Transaction: uniqueActivities.filter((a) => a.type === 'Transaction').length,
         GM: uniqueActivities.filter((a) => a.type === 'GM').length,
         'Check-in': uniqueActivities.filter((a) => a.type === 'Check-in').length,
+        'Legends': legends.length,
     };
 
     const visibleActivities = uniqueActivities.filter((a) => {
@@ -299,7 +306,9 @@ const HomePage = () => {
                 {/* Activity Section */}
                 <section className="mb-12 animate-fade-in-up delay-400">
                     <div className="flex items-center justify-between mb-6">
-                        <h3 className="font-black text-lg tracking-tight text-slate-900 dark:text-white px-1">Recent Activity</h3>
+                        <h3 className="font-black text-lg tracking-tight text-slate-900 dark:text-white px-1">
+                            {activityFilter === 'Legends' ? 'My Legends' : 'Recent Activity'}
+                        </h3>
                         {activities.length > 0 && (
                             <button className="text-[10px] font-black uppercase tracking-[0.15em] text-primary bg-primary/5 px-3 py-1.5 rounded-full">
                                 History
@@ -307,62 +316,93 @@ const HomePage = () => {
                         )}
                     </div>
 
-                    {activities.length > 0 && (
-                        <div className="flex gap-2 mb-6 overflow-x-auto pb-2 scrollbar-hide">
-                            {['All', 'Transaction', 'GM', 'Check-in'].map((tab) => (
-                                <button
-                                    key={tab}
-                                    onClick={() => setActivityFilter(tab)}
-                                    className={`whitespace-nowrap px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest border transition-all ${activityFilter === tab
-                                        ? 'bg-primary/10 border-primary/30 text-primary'
-                                        : 'bg-white dark:bg-slate-900/40 border-slate-100 dark:border-white/5 text-slate-400 dark:text-slate-500'
-                                        }`}
-                                >
-                                    {tab} <span className="ml-1 opacity-50 tabular-nums">{counts[tab] ?? 0}</span>
-                                </button>
-                            ))}
-                        </div>
-                    )}
+                    <div className="flex gap-2 mb-6 overflow-x-auto pb-2 scrollbar-hide">
+                        {['All', 'Transaction', 'GM', 'Check-in', 'Legends'].map((tab) => (
+                            <button
+                                key={tab}
+                                onClick={() => setActivityFilter(tab)}
+                                className={`whitespace-nowrap px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest border transition-all ${activityFilter === tab
+                                    ? 'bg-primary/10 border-primary/30 text-primary'
+                                    : 'bg-white dark:bg-slate-900/40 border-slate-100 dark:border-white/5 text-slate-400 dark:text-slate-500'
+                                    }`}
+                            >
+                                {tab} <span className="ml-1 opacity-50 tabular-nums">{counts[tab] ?? 0}</span>
+                            </button>
+                        ))}
+                    </div>
 
                     <div className="space-y-4">
-                        {!isConnected ? (
-                            <div className="text-center py-10 glass-effect rounded-[2rem] border-dashed border border-slate-200 dark:border-white/5">
-                                <span className="material-icons text-4xl text-slate-300 dark:text-slate-700 mb-3">lock</span>
-                                <p className="text-slate-500 font-bold text-sm tracking-tight px-6">Connect your wallet to track your onchain journey</p>
-                            </div>
-                        ) : activities.length === 0 ? (
-                            <div className="text-center py-10 glass-effect rounded-[2rem] border-dashed border border-slate-200 dark:border-white/5">
-                                <span className="material-icons text-4xl text-slate-300 dark:text-slate-700 mb-3">waves</span>
-                                <p className="text-slate-500 font-bold text-sm tracking-tight px-6">Your activity feed is empty. Start with a GM!</p>
-                            </div>
-                        ) : (
-                            visibleActivities.map((activity) => (
-                                <div
-                                    key={activity.id}
-                                    onClick={() => handleTxClick(activity)}
-                                    className="flex items-center justify-between p-4 rounded-3xl glass-effect dark:bg-slate-900/20 border border-slate-100 dark:border-white/5 hover:border-primary/20 hover:bg-white dark:hover:bg-slate-900/40 transition-all cursor-pointer group active:scale-[0.98] relative overflow-hidden"
-                                >
-                                    <div className="flex items-center gap-4">
-                                        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner ${activity.type === 'GM'
-                                            ? 'bg-blue-500/10 text-blue-500'
-                                            : activity.type === 'Check-in' ? 'bg-orange-500/10 text-orange-500' : 'bg-primary/10 text-primary'
-                                            }`}>
-                                            <span className="material-icons text-xl">{activity.icon || (activity.type === 'GM' ? 'send' : 'star')}</span>
-                                        </div>
-                                        <div>
-                                            <h4 className="font-black text-sm text-slate-900 dark:text-white group-hover:text-primary transition-colors">{activity.title || activity.type}</h4>
-                                            <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-0.5 uppercase tracking-wider">{activity.timestamp || activity.time}</p>
-                                        </div>
-                                    </div>
-                                    <div className="text-right">
-                                        <p className="font-black text-sm text-slate-900 dark:text-white tracking-tighter">{activity.amount}</p>
-                                        <div className="flex items-center justify-end gap-1 mt-1">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                                            <p className="text-[8px] font-black text-emerald-500 uppercase tracking-widest">Success</p>
-                                        </div>
-                                    </div>
+                        {activityFilter === 'Legends' ? (
+                            legends.length === 0 ? (
+                                <div className="text-center py-10 glass-effect rounded-[2rem] border-dashed border border-slate-200 dark:border-white/5">
+                                    <span className="material-icons text-4xl text-slate-300 dark:text-slate-700 mb-3">auto_awesome</span>
+                                    <p className="text-slate-500 font-bold text-sm tracking-tight px-6">Your collection is empty. Mint your first Legend!</p>
                                 </div>
-                            ))
+                            ) : (
+                                <div className="grid grid-cols-2 gap-4">
+                                    {legends.map((nft) => (
+                                        <div key={nft.id} className="relative group/legend hover:scale-[1.05] transition-all duration-500">
+                                            <div className="absolute inset-0 bg-primary/20 blur-xl rounded-[2rem] opacity-0 group-hover/legend:opacity-100 transition-opacity"></div>
+                                            <div className="aspect-square rounded-[2rem] border-2 border-white dark:border-white/10 overflow-hidden relative shadow-2xl">
+                                                <img
+                                                    src={nft.image}
+                                                    alt="Legend NFT"
+                                                    className="w-full h-full object-cover"
+                                                    onError={(e) => {
+                                                        e.target.onerror = null;
+                                                        e.target.src = '/images/hero.png';
+                                                    }}
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+                                                    <p className="text-[9px] font-black text-white uppercase tracking-widest">
+                                                        {new Date(nft.mintedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )
+                        ) : (
+                            !isConnected ? (
+                                <div className="text-center py-10 glass-effect rounded-[2rem] border-dashed border border-slate-200 dark:border-white/5">
+                                    <span className="material-icons text-4xl text-slate-300 dark:text-slate-700 mb-3">lock</span>
+                                    <p className="text-slate-500 font-bold text-sm tracking-tight px-6">Connect your wallet to track your onchain journey</p>
+                                </div>
+                            ) : activities.length === 0 ? (
+                                <div className="text-center py-10 glass-effect rounded-[2rem] border-dashed border border-slate-200 dark:border-white/5">
+                                    <span className="material-icons text-4xl text-slate-300 dark:text-slate-700 mb-3">waves</span>
+                                    <p className="text-slate-500 font-bold text-sm tracking-tight px-6">Your activity feed is empty. Start with a GM!</p>
+                                </div>
+                            ) : (
+                                visibleActivities.map((activity) => (
+                                    <div
+                                        key={activity.id}
+                                        onClick={() => handleTxClick(activity)}
+                                        className="flex items-center justify-between p-4 rounded-3xl glass-effect dark:bg-slate-900/20 border border-slate-100 dark:border-white/5 hover:border-primary/20 hover:bg-white dark:hover:bg-slate-900/40 transition-all cursor-pointer group active:scale-[0.98] relative overflow-hidden"
+                                    >
+                                        <div className="flex items-center gap-4">
+                                            <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-inner ${activity.type === 'GM'
+                                                ? 'bg-blue-500/10 text-blue-500'
+                                                : activity.type === 'Check-in' ? 'bg-orange-500/10 text-orange-500' : 'bg-primary/10 text-primary'
+                                                }`}>
+                                                <span className="material-icons text-xl">{activity.icon || (activity.type === 'GM' ? 'send' : 'star')}</span>
+                                            </div>
+                                            <div>
+                                                <h4 className="font-black text-sm text-slate-900 dark:text-white group-hover:text-primary transition-colors">{activity.title || activity.type}</h4>
+                                                <p className="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-0.5 uppercase tracking-wider">{activity.timestamp || activity.time}</p>
+                                            </div>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="font-black text-sm text-slate-900 dark:text-white tracking-tighter">{activity.amount}</p>
+                                            <div className="flex items-center justify-end gap-1 mt-1">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                                <p className="text-[8px] font-black text-emerald-500 uppercase tracking-widest">Success</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            )
                         )}
                     </div>
                 </section>
