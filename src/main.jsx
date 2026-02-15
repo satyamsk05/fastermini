@@ -7,7 +7,6 @@ import { base } from 'viem/chains';
 import { config } from './wagmi';
 import App from './App';
 import './index.css';
-import '@coinbase/onchainkit/styles.css';
 
 import { ActivityProvider } from './context/ActivityContext';
 import { UserProvider } from './context/UserContext';

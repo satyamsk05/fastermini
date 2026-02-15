@@ -51,7 +51,7 @@ const TabBar = () => {
     }, [currentIndex]);
     return (
         <nav
-            className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[92%] sm:w-[85%] max-w-[720px] h-16 glass-effect dark:bg-slate-900/80 rounded-full flex items-center justify-around px-2 ios-shadow border border-slate-200 dark:border-white/10 z-50"
+            className="fixed bottom-4 left-1/2 -translate-x-1/2 w-[92%] sm:w-[85%] max-w-[720px] h-16 glass-effect dark:bg-surface-dark/90 rounded-full flex items-center justify-around px-2 ios-shadow border border-slate-200 dark:border-white/5 z-50"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             ref={containerRef}
@@ -60,24 +60,24 @@ const TabBar = () => {
                 className="absolute top-1/2 -translate-y-1/2 pointer-events-none z-0"
                 style={{ left: pillLeft, width: pillWidth, height: 48, transition: 'left 300ms cubic-bezier(0.22, 1, 0.36, 1), width 200ms ease' }}
             >
-                <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-500/25 to-blue-400/20 dark:from-blue-400/20 dark:to-blue-300/15 border border-blue-500/30 shadow-lg blur-[0.2px]" />
+                <div className="w-full h-full rounded-full bg-gradient-to-br from-primary/20 to-blue-600/10 border border-primary/20 shadow-[0_0_15px_rgba(59,130,246,0.15)]" />
             </div>
             {/* center ring removed by request */}
-            <button ref={btnRefs[0]} onClick={() => navigate('/')} className={`relative z-10 flex flex-col items-center flex-1 transition-all ${isActive('/') ? 'text-primary scale-105' : 'text-slate-500 dark:text-slate-400'}`}>
-                <span className="material-icons text-xl">home</span>
-                <span className="text-[9px] font-black mt-0.5 uppercase tracking-tighter">Home</span>
+            <button ref={btnRefs[0]} onClick={() => navigate('/')} className={`relative z-10 flex flex-col items-center flex-1 transition-all duration-300 ${isActive('/') ? 'text-white scale-105' : 'text-text-muted hover:text-text-secondary'}`}>
+                <span className={`material-icons text-xl transition-colors ${isActive('/') ? 'text-primary drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]' : ''}`}>home</span>
+                <span className="text-[9px] font-bold mt-0.5 uppercase tracking-tighter">Home</span>
             </button>
-            <button ref={btnRefs[1]} onClick={() => navigate('/checkin')} className={`relative z-10 flex flex-col items-center flex-1 transition-all ${isActive('/checkin') ? 'text-primary scale-105' : 'text-slate-500 dark:text-slate-400'}`}>
-                <span className="material-icons text-xl">calendar_today</span>
-                <span className="text-[9px] font-black mt-0.5 uppercase tracking-tighter">Check-In</span>
+            <button ref={btnRefs[1]} onClick={() => navigate('/checkin')} className={`relative z-10 flex flex-col items-center flex-1 transition-all duration-300 ${isActive('/checkin') ? 'text-white scale-105' : 'text-text-muted hover:text-text-secondary'}`}>
+                <span className={`material-icons text-xl transition-colors ${isActive('/checkin') ? 'text-primary drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]' : ''}`}>calendar_today</span>
+                <span className="text-[9px] font-bold mt-0.5 uppercase tracking-tighter">Check-In</span>
             </button>
-            <button ref={btnRefs[2]} onClick={() => navigate('/gm')} className={`relative z-10 flex flex-col items-center flex-1 transition-all ${isActive('/gm') ? 'text-primary scale-105' : 'text-slate-500 dark:text-slate-400'}`}>
-                <span className="material-icons text-xl">bolt</span>
-                <span className="text-[9px] font-black mt-0.5 uppercase tracking-tighter">Send GM</span>
+            <button ref={btnRefs[2]} onClick={() => navigate('/gm')} className={`relative z-10 flex flex-col items-center flex-1 transition-all duration-300 ${isActive('/gm') ? 'text-white scale-105' : 'text-text-muted hover:text-text-secondary'}`}>
+                <span className={`material-icons text-xl transition-colors ${isActive('/gm') ? 'text-primary drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]' : ''}`}>bolt</span>
+                <span className="text-[9px] font-bold mt-0.5 uppercase tracking-tighter">Send GM</span>
             </button>
-            <button ref={btnRefs[3]} onClick={() => navigate('/settings')} className={`relative z-10 flex flex-col items-center flex-1 transition-all ${isActive('/settings') ? 'text-primary scale-105' : 'text-slate-500 dark:text-slate-400'}`}>
-                <span className="material-icons text-xl">settings</span>
-                <span className="text-[9px] font-black mt-0.5 uppercase tracking-tighter">Settings</span>
+            <button ref={btnRefs[3]} onClick={() => navigate('/settings')} className={`relative z-10 flex flex-col items-center flex-1 transition-all duration-300 ${isActive('/settings') ? 'text-white scale-105' : 'text-text-muted hover:text-text-secondary'}`}>
+                <span className={`material-icons text-xl transition-colors ${isActive('/settings') ? 'text-primary drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]' : ''}`}>settings</span>
+                <span className="text-[9px] font-bold mt-0.5 uppercase tracking-tighter">Settings</span>
             </button>
         </nav>
     );

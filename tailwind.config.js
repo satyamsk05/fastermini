@@ -10,7 +10,12 @@ export default {
       colors: {
         "primary": "#2b8cee",
         "background-light": "#f6f7f8",
-        "background-dark": "#0B1121",
+        "background-dark": "#0b0f19",
+        "background-dark-end": "#121826",
+        "surface-dark": "#161b2e",
+        "border-dark": "#232a45",
+        "text-secondary": "#9aa4c7",
+        "text-muted": "#6b7280",
       },
       fontFamily: {
         "display": ["Inter", "sans-serif"],
