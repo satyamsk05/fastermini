@@ -4,9 +4,9 @@ import StatusBar from '../components/StatusBar';
 import { useAccount } from 'wagmi';
 import { base } from 'viem/chains';
 import { encodeFunctionData, parseEther } from 'viem';
-import { 
-  Transaction, 
-  TransactionButton, 
+import {
+  Transaction,
+  TransactionButton,
   TransactionStatus,
   TransactionStatusAction,
   TransactionStatusLabel
@@ -58,7 +58,7 @@ const MintPage = () => {
   ];
 
   return (
-    <div className="flex flex-col h-full w-full max-w-full bg-slate-50 dark:bg-slate-950 overflow-hidden fixed inset-0">
+    <div className="flex flex-col h-full w-full max-w-full bg-background-light dark:bg-background-dark overflow-hidden fixed inset-0">
       <StatusBar dark={false} notch={true} />
       <header className="flex items-center justify-between px-6 py-4 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-md z-20 shrink-0 border-b border-slate-200/50 dark:border-white/5">
         <button onClick={() => navigate(-1)} className="w-12 h-12 flex items-center justify-center rounded-full bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 shadow-sm active:scale-90 transition-all">
@@ -118,7 +118,7 @@ const MintPage = () => {
               <div className="bg-slate-50 dark:bg-white/5 p-4 rounded-2xl border border-slate-100 dark:border-white/5">
                 <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Success</p>
                 <p className="text-sm font-black text-green-600 dark:text-green-400 mb-2">Deployment NFT received</p>
-                <a 
+                <a
                   href={`https://basescan.org/tx/${txHash}`}
                   target="_blank"
                   rel="noopener noreferrer"

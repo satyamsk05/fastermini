@@ -261,7 +261,7 @@ const HomePage = () => {
         : `https://api.dicebear.com/7.x/notionists/svg?seed=guest&backgroundColor=b6e3f4`;
 
     return (
-        <div className="flex flex-col h-full w-full max-w-full bg-slate-50 dark:bg-slate-950 overflow-hidden fixed inset-0">
+        <div className="flex flex-col h-full w-full max-w-full bg-background-light dark:bg-background-dark overflow-hidden fixed inset-0">
             <div className="bg-orb bg-primary/30 -top-20 -right-20"></div>
             <div className="bg-orb bg-primary/20 top-1/2 -left-20"></div>
 

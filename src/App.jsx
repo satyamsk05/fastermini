@@ -9,7 +9,7 @@ import TabBar from './components/TabBar';
 import MintPage from './pages/MintPage';
 
 const AppContent = () => {
-    const [isDark, setIsDark] = useState(false);
+    const [isDark, setIsDark] = useState(true);
     const navigate = useNavigate();
     const location = useLocation();
     const routes = ['/', '/checkin', '/gm', '/settings'];
@@ -43,36 +43,36 @@ const AppContent = () => {
     }, [isDark]);
 
     return (
-        <div 
-            className="app-container relative h-full w-full overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-300"
+        <div
+            className="app-container relative h-full w-full overflow-hidden bg-background-light dark:bg-background-dark transition-colors duration-300"
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
         >
-                {/* Dark Mode Toggle */}
-                <button 
-                    onClick={() => setIsDark(!isDark)}
-                    className="fixed top-24 right-0 z-[100] bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl p-2.5 rounded-l-2xl flex items-center gap-2 group transition-all hover:pl-4 active:scale-95"
-                >
-                    <div className="w-8 h-8 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center transition-colors">
-                        <span className="material-icons text-primary text-lg">
-                            {isDark ? 'light_mode' : 'dark_mode'}
-                        </span>
-                    </div>
-                </button>
+            {/* Dark Mode Toggle */}
+            <button
+                onClick={() => setIsDark(!isDark)}
+                className="fixed top-24 right-0 z-[100] bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-white/10 shadow-xl p-2.5 rounded-l-2xl flex items-center gap-2 group transition-all hover:pl-4 active:scale-95"
+            >
+                <div className="w-8 h-8 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center transition-colors">
+                    <span className="material-icons text-primary text-lg">
+                        {isDark ? 'light_mode' : 'dark_mode'}
+                    </span>
+                </div>
+            </button>
 
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/checkin" element={<CheckInPage />} />
-                    <Route path="/gm" element={<GMPage />} />
-                    <Route path="/mint" element={<MintPage />} />
-                    <Route path="/deploy" element={<DeployPage />} />
-                    <Route path="/settings" element={<SettingsPage />} />
-                </Routes>
-                
-                <TabBar />
-                
-                {/* iOS Indicator Bar */}
-                <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-200 dark:bg-slate-800 rounded-full z-[70]"></div>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/checkin" element={<CheckInPage />} />
+                <Route path="/gm" element={<GMPage />} />
+                <Route path="/mint" element={<MintPage />} />
+                <Route path="/deploy" element={<DeployPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
+            </Routes>
+
+            <TabBar />
+
+            {/* iOS Indicator Bar */}
+            <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-200 dark:bg-slate-800 rounded-full z-[70]"></div>
         </div>
     );
 };
